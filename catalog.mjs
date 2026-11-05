@@ -63,6 +63,11 @@ export function validateQuote({ name = '', phone = '', email = '' } = {}) {
   return errors;
 }
 
+export function buildQuoteDraft({ items = '', name = '', phone = '', email = '' } = {}) {
+  const contact = [phone.trim(), email.trim()].filter(Boolean).join(' / ');
+  return `Здравствуйте! Прошу уточнить цену и комплектацию.\n\nИнтересующая техника: ${items.trim() || 'Не выбрана'}\nИмя: ${name.trim()}\nКонтакт: ${contact}\n\nПрошу подтвердить характеристики и наличие у поставщика.`;
+}
+
 function equipmentIllustration(kind) {
   const fork = `<svg viewBox="0 0 320 210" aria-hidden="true"><path d="M70 142h160l-12 34H82z" fill="#e3b73e"/><path d="M93 88h95l25 54H73z" fill="#e3b73e"/><path d="M188 88h8l12 54h-8zM206 68h7v75h-7zM218 68h7v75h-7z" fill="#223b3b"/><path d="M84 91h41V67h42v24h20l20 51H70z" fill="#dda92b"/><path d="M125 70h35v24h-35z" fill="#bdd1ca"/><circle cx="112" cy="174" r="24" fill="#203434"/><circle cx="203" cy="174" r="24" fill="#203434"/><circle cx="112" cy="174" r="10" fill="#95a69e"/><circle cx="203" cy="174" r="10" fill="#95a69e"/><path d="M36 143h44v6H36zM35 155h58v6H35z" fill="#283d3d"/></svg>`;
   const reach = `<svg viewBox="0 0 320 210" aria-hidden="true"><path d="M86 125h162v46H86z" fill="#e0b640"/><path d="M106 86h56v39h-56z" fill="#d4a72f"/><path d="M169 49h9v112h-9zM183 49h9v112h-9zM198 49h7v112h-7z" fill="#263b3b"/><path d="M147 62h34v31h-34z" fill="#bfd2ca"/><circle cx="120" cy="174" r="22" fill="#203434"/><circle cx="221" cy="174" r="22" fill="#203434"/><circle cx="120" cy="174" r="9" fill="#95a69e"/><circle cx="221" cy="174" r="9" fill="#95a69e"/><path d="M202 55h64v5h-64z" fill="#2b4240"/></svg>`;
@@ -100,7 +105,7 @@ function renderProducts(announce = false) {
       <div class="product-body"><p class="brand-name">${product.brand}</p><h3>${product.name}</h3>
         <dl class="spec-list"><div><dt>Грузоподъёмность</dt><dd>${new Intl.NumberFormat('ru-RU').format(product.capacityKg)} кг</dd></div><div><dt>Высота подъёма</dt><dd>${product.liftMm ? `${new Intl.NumberFormat('ru-RU').format(product.liftMm)} мм` : 'низкий подъём'}</dd></div><div><dt>Привод</dt><dd>${product.power === 'manual' ? 'ручной' : 'электрический'}</dd></div></dl>
         <details class="product-source"><summary>Источник параметров</summary><p>${product.sourceNote} <a href="${product.source}">Источник: ${product.brand} ${product.model}</a></p></details>
-        <div class="product-actions"><button class="button button--quiet compare-toggle" type="button" data-compare="${product.id}" aria-pressed="${compareIds.includes(product.id)}" aria-label="${compareIds.includes(product.id) ? 'В сравнении: ' + product.brand + ' ' + product.model : 'Сравнить ' + product.brand + ' ' + product.model}">${compareIds.includes(product.id) ? 'В сравнении' : 'Сравнить'}</button><button class="button button--text quote-product" type="button" data-quote="${product.id}" aria-label="Запросить цену: ${product.name}">Запросить цену</button></div>
+        <div class="product-actions"><button class="button button--quiet compare-toggle" type="button" data-compare="${product.id}" aria-pressed="${compareIds.includes(product.id)}" aria-label="${compareIds.includes(product.id) ? 'В сравнении: ' + product.brand + ' ' + product.model : 'Сравнить ' + product.brand + ' ' + product.model}">${compareIds.includes(product.id) ? 'В сравнении' : 'Сравнить'}</button><button class="button button--text quote-product" type="button" data-quote="${product.id}" aria-label="Подготовить запрос по модели ${product.name}">Подготовить запрос</button></div>
       </div>
     </article>`).join('');
   productsGrid.querySelectorAll('[data-compare]').forEach((button) => button.addEventListener('click', () => {
@@ -145,6 +150,8 @@ function openQuote(ids) {
   byId('quote-items').value = ids.map((id) => products.find((p) => p.id === id)?.name).filter(Boolean).join(', ');
   byId('quote-success').hidden = true;
   quoteForm.hidden = false;
+  byId('quote-draft').value = '';
+  byId('quote-copy').textContent = 'Скопировать текст';
   quoteDialog.showModal();
 }
 
@@ -160,6 +167,18 @@ byId('compare-clear-dialog').addEventListener('click', () => { compareIds = []; 
 byId('quote-open').addEventListener('click', () => openQuote(compareIds));
 byId('quote-close').addEventListener('click', () => quoteDialog.close());
 byId('quote-close-success').addEventListener('click', () => quoteDialog.close());
+byId('quote-copy').addEventListener('click', async () => {
+  const draft = byId('quote-draft');
+  try {
+    await navigator.clipboard.writeText(draft.value);
+    byId('quote-copy').textContent = 'Скопировано';
+    status.textContent = 'Текст обращения скопирован.';
+  } catch {
+    draft.focus();
+    draft.select();
+    status.textContent = 'Текст выделен. Скопируйте его вручную.';
+  }
+});
 byId('compare-close').addEventListener('click', () => compareDialog.close());
 byId('empty-clear').addEventListener('click', () => { filtersForm.reset(); renderProducts(true); });
 
@@ -178,9 +197,10 @@ quoteForm.addEventListener('submit', (event) => {
     quoteForm.querySelector('[aria-invalid="true"]').focus();
     return;
   }
+  byId('quote-draft').value = buildQuoteDraft(values);
   quoteForm.hidden = true;
   byId('quote-success').hidden = false;
-  status.textContent = 'Запрос подготовлен.';
+  status.textContent = 'Текст обращения подготовлен. Данные не отправлены.';
 });
 
 renderProducts();

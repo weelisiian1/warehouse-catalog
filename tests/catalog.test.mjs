@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { filterProducts, formatModelCount, toggleCompare, validateQuote } from '../catalog.mjs';
+import { buildQuoteDraft, filterProducts, formatModelCount, toggleCompare, validateQuote } from '../catalog.mjs';
 
 const products = [
   { id: 'reach-1', name: 'Ричтрак', type: 'reach', power: 'electric', capacityKg: 1600, liftMm: 7000, environments: ['indoors'] },
@@ -30,6 +30,15 @@ test('comparison toggles an item and refuses duplicates or more than three items
   assert.deepEqual(toggleCompare(once, 'reach-1'), []);
   assert.deepEqual(toggleCompare(['reach-1'], 'reach-1'), []);
   assert.deepEqual(toggleCompare(['reach-1', 'fork-1', 'stacker-1'], 'fourth'), ['reach-1', 'fork-1', 'stacker-1']);
+});
+
+test('quote draft is composed locally from selected models and the provided contact without claiming to send it', () => {
+  const draft = buildQuoteDraft({ items: 'Ричтрак CQD16L', name: ' Ирина ', phone: '+7 900 123-45-67', email: '' });
+  assert.match(draft, /Ричтрак CQD16L/);
+  assert.match(draft, /Имя: Ирина/);
+  assert.match(draft, /Контакт: \+7 900 123-45-67/);
+  assert.match(draft, /Прошу уточнить цену и комплектацию/);
+  assert.doesNotMatch(draft, /отправлено|доставлено/i);
 });
 
 test('quote form requires a name and at least one contact method', () => {
