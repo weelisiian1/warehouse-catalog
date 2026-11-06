@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildQuoteDraft, filterProducts, formatModelCount, toggleCompare, validateQuote } from '../catalog.mjs';
+import { buildQuoteDraft, filterProducts, formatModelCount, products as catalogProducts, toggleCompare, validateQuote } from '../catalog.mjs';
 
 const products = [
   { id: 'reach-1', name: 'Ричтрак', type: 'reach', power: 'electric', capacityKg: 1600, liftMm: 7000, environments: ['indoors'] },
@@ -46,4 +46,32 @@ test('quote form requires a name and at least one contact method', () => {
   assert.match(validateQuote({ name: 'Ирина', phone: '', email: '' }).contact, /телефон или почту/);
   assert.match(validateQuote({ name: 'Ирина', phone: '+7 900 123-45-67', email: 'not-an-email' }).email, /почты/);
   assert.deepEqual(validateQuote({ name: 'Ирина', phone: '+7 900 123-45-67', email: '' }), {});
+});
+
+test('catalogue model facts match their traceable specification sources', () => {
+  const byId = Object.fromEntries(catalogProducts.map((product) => [product.id, product]));
+
+  assert.deepEqual(
+    [byId['teu-flb18s'].capacityKg, byId['teu-flb18s'].liftMinMm, byId['teu-flb18s'].liftMm, byId['teu-flb18s'].loadCentreMm],
+    [1800, 3000, 4700, 500],
+  );
+  assert.deepEqual([byId['teu-flb18s'].batteryVoltageV, byId['teu-flb18s'].batteryCapacitiesAh], [76.8, [205, 280]]);
+
+  assert.deepEqual(
+    [byId['ep-cqd16l'].capacityKg, byId['ep-cqd16l'].liftMm, byId['ep-cqd16l'].maxLiftMm, byId['ep-cqd16l'].loadCentreMm],
+    [1600, 6500, 8000, 600],
+  );
+  assert.deepEqual([byId['ep-cqd16l'].batteryVoltageV, byId['ep-cqd16l'].batteryCapacityAh], [48, 405]);
+
+  assert.deepEqual(
+    [byId['xilin-cdd15ren'].capacityKg, byId['xilin-cdd15ren'].mastHeightsMm, byId['xilin-cdd15ren'].loadCentreMm],
+    [1500, [1600, 2500, 3000, 3300, 3500], 600],
+  );
+  assert.deepEqual([byId['xilin-cdd15ren'].batteryVoltageV, byId['xilin-cdd15ren'].batteryCapacityAh], [24, 105]);
+
+  assert.deepEqual(
+    [byId['toyota-lhm230'].capacityKg, byId['toyota-lhm230'].liftMm, byId['toyota-lhm230'].loadCentreMm, byId['toyota-lhm230'].serviceWeightKg],
+    [2300, 200, 600, 63],
+  );
+  assert.ok(catalogProducts.every(({ source }) => /^https:\/\//.test(source)));
 });

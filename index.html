@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Погрузчики, ричтраки, штабелёры и тележки: подберите складскую технику по грузу, высоте подъёма и условиям работы.">
-  <meta name="theme-color" content="#202421">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Склад / Техника — выбор начинается с задачи</title>
+  <meta name="description" content="Сравните складскую технику по грузоподъёмности, высоте подъёма, центру нагрузки и питанию. В карточках — ссылки на источники характеристик.">
+  <meta name="theme-color" content="#1f2925">
+  <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml">
+  <title>Склад / Техника — модели и характеристики</title>
   <link rel="preload" as="image" href="https://images.pexels.com/photos/4483608/pexels-photo-4483608.jpeg?cs=tinysrgb&amp;w=1600" fetchpriority="high" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -19,110 +18,196 @@
       <span class="wordmark-name">СКЛАД<span>/</span>ТЕХНИКА</span>
     </a>
     <nav class="main-nav" aria-label="Основная навигация">
-      <a href="#catalog">Каталог</a>
-      <a href="#selection">Подбор</a>
-      <a href="#approach">Как выбрать</a>
+      <a href="#catalog">Модели</a>
+      <a href="#selection">Фильтры</a>
+      <a href="#approach">Перед выбором</a>
     </nav>
-    <a class="header-action" href="#selection">Подобрать технику <span aria-hidden="true">↗</span></a>
+    <a class="header-action" href="#selection">К фильтрам</a>
   </header>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span> Оборудование для складских задач</p>
-        <h1 id="hero-title">Техника<br><span>под задачу.</span></h1>
-        <p class="hero-lead">Сверьте груз, высоту подъёма, проходы и тип привода. Сравните подходящие модели до того, как обсуждать покупку.</p>
+        <p class="eyebrow">Каталог складской техники</p>
+        <h1 id="hero-title">Складская техника<br><span>по рабочим параметрам</span></h1>
+        <p class="hero-lead">Сравните грузоподъёмность, высоту подъёма, центр нагрузки и питание. У каждой модели есть ссылка на источник характеристик.</p>
         <div class="hero-actions">
-          <a class="button button--accent" href="#selection">Подобрать технику <span aria-hidden="true">↓</span></a>
-          <a class="text-link" href="#catalog">Смотреть каталог <span aria-hidden="true">↗</span></a>
+          <a class="button button--accent" href="#catalog">Смотреть модели</a>
+          <a class="text-link" href="#selection">Настроить фильтры</a>
         </div>
-        <div class="hero-index"><span>01</span><span class="index-line" aria-hidden="true"></span><span>Сначала задача. Потом модель.</span></div>
       </div>
       <figure class="hero-visual">
         <img src="https://images.pexels.com/photos/4483608/pexels-photo-4483608.jpeg?cs=tinysrgb&amp;w=1600" alt="Складской проход с высокими стеллажами и паллетами" width="1600" height="2400" fetchpriority="high" referrerpolicy="no-referrer">
-        <span class="visual-index" aria-hidden="true">СКЛАД / 01</span>
-        <figcaption><span class="caption-mark" aria-hidden="true"></span>Выбор начинается с маршрута внутри склада</figcaption>
-        <div class="visual-note"><span class="visual-note-label">Грузовая логика</span><strong>Подъём<br>· Перемещение<br>· Штабелирование</strong></div>
+        <figcaption>Складской проход. Фото для контекста.</figcaption>
       </figure>
     </section>
 
-    <div class="category-band" aria-label="Категории каталога">
-      <span>ВИЛОЧНЫЕ ПОГРУЗЧИКИ</span><i aria-hidden="true"></i><span>РИЧТРАКИ</span><i aria-hidden="true"></i><span>ШТАБЕЛЁРЫ</span><i aria-hidden="true"></i><span>ТЕЛЕЖКИ</span>
-    </div>
-
     <section class="finder-section" id="selection" aria-labelledby="selection-title">
-      <div class="section-head section-head--light">
-        <div><p class="eyebrow eyebrow--light">Подбор по условиям работы</p><h2 id="selection-title">Сузьте выбор<br><span>до подходящего типа.</span></h2></div>
-        <p>Начните с параметров груза и склада. Фильтры покажут модели для сравнения, а не заменят проверку комплектации.</p>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Фильтры по данным каталога</p>
+          <h2 id="selection-title">Найдите подходящие модели</h2>
+        </div>
+        <p>Высота мачты и характеристики могут зависеть от комплектации. Сверяйте выбранный вариант по ссылке в карточке.</p>
       </div>
       <form class="filter-panel" id="filters" aria-label="Фильтры складской техники">
-        <label class="filter-field"><span>Тип техники</span><select name="type"><option value="">Все категории</option><option value="forklift">Вилочные погрузчики</option><option value="reach">Ричтраки</option><option value="stacker">Штабелёры</option><option value="pallet">Тележки</option></select></label>
-        <label class="filter-field"><span>Грузоподъёмность от</span><select name="capacityMin"><option value="">Любая</option><option value="1200">1 200 кг</option><option value="1500">1 500 кг</option><option value="1800">1 800 кг</option><option value="2000">2 000 кг</option></select></label>
-        <label class="filter-field"><span>Высота подъёма от</span><select name="liftMin"><option value="">Любая</option><option value="3000">3 м</option><option value="4500">4,5 м</option><option value="6000">6 м</option></select></label>
-        <label class="filter-field"><span>Тип привода</span><select name="power"><option value="">Любой</option><option value="electric">Электрический</option><option value="manual">Ручной</option></select></label>
-        <label class="filter-field"><span>Рабочая среда</span><select name="environment"><option value="">Любая</option><option value="indoors">В помещении</option><option value="outdoors">На территории</option></select></label>
-        <label class="filter-field filter-field--query"><span>Модель или категория</span><input type="search" name="query" placeholder="Например, ричтрак" autocomplete="off"></label>
-        <button class="button button--accent filter-submit" type="submit" id="show-results">Показать модели <span aria-hidden="true">↗</span></button>
+        <label class="filter-field">
+          <span>Тип техники</span>
+          <select name="type">
+            <option value="">Все категории</option>
+            <option value="forklift">Вилочные погрузчики</option>
+            <option value="reach">Ричтраки</option>
+            <option value="stacker">Штабелёры</option>
+            <option value="pallet">Гидравлические тележки</option>
+          </select>
+        </label>
+        <label class="filter-field">
+          <span>Грузоподъёмность от</span>
+          <select name="capacityMin">
+            <option value="">Любая</option>
+            <option value="1500">1 500 кг</option>
+            <option value="1600">1 600 кг</option>
+            <option value="1800">1 800 кг</option>
+            <option value="2300">2 300 кг</option>
+          </select>
+        </label>
+        <label class="filter-field">
+          <span>Подъём от</span>
+          <select name="liftMin">
+            <option value="">Любая высота</option>
+            <option value="3000">3 000 мм</option>
+            <option value="4500">4 500 мм</option>
+            <option value="6500">6 500 мм</option>
+          </select>
+        </label>
+        <label class="filter-field">
+          <span>Питание</span>
+          <select name="power">
+            <option value="">Любое</option>
+            <option value="electric">Электрическое</option>
+            <option value="manual">Ручное</option>
+          </select>
+        </label>
+        <label class="filter-field filter-field--query">
+          <span>Бренд или модель</span>
+          <input type="search" name="query" placeholder="Например, CQD16L" autocomplete="off">
+        </label>
+        <button class="button button--accent filter-submit" type="submit" id="show-results">К моделям</button>
         <button class="clear-filters" type="button" id="clear-filters">Сбросить фильтры</button>
       </form>
     </section>
 
     <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
       <div class="catalog-heading">
-        <div><p class="eyebrow">Модели и характеристики</p><h2 id="catalog-title">Каталог<span class="title-period">.</span></h2></div>
-        <div class="catalog-tools"><p id="result-count" aria-live="polite">4 модели</p><button class="compare-link" id="catalog-compare-open" type="button" disabled>Сравнение <span class="compare-pill" id="catalog-compare-count">0</span></button></div>
+        <div>
+          <p class="eyebrow">Модели и характеристики</p>
+          <h2 id="catalog-title">Каталог</h2>
+        </div>
+        <div class="catalog-tools">
+          <p id="result-count" aria-live="polite">4 модели</p>
+          <button class="compare-link" id="catalog-compare-open" type="button" disabled>
+            Сравнение <span class="compare-pill" id="catalog-compare-count">0</span>
+          </button>
+        </div>
       </div>
       <div class="catalog-toolbar">
         <div class="category-rail" role="group" aria-label="Фильтр по категории">
-          <button type="button" data-category="forklift" aria-pressed="false" aria-controls="products">Погрузчики <span aria-hidden="true">↗</span></button>
-          <button type="button" data-category="reach" aria-pressed="false" aria-controls="products">Ричтраки <span aria-hidden="true">↗</span></button>
-          <button type="button" data-category="stacker" aria-pressed="false" aria-controls="products">Штабелёры <span aria-hidden="true">↗</span></button>
-          <button type="button" data-category="pallet" aria-pressed="false" aria-controls="products">Тележки <span aria-hidden="true">↗</span></button>
+          <button type="button" data-category="forklift" aria-pressed="false" aria-controls="products">Погрузчики</button>
+          <button type="button" data-category="reach" aria-pressed="false" aria-controls="products">Ричтраки</button>
+          <button type="button" data-category="stacker" aria-pressed="false" aria-controls="products">Штабелёры</button>
+          <button type="button" data-category="pallet" aria-pressed="false" aria-controls="products">Тележки</button>
         </div>
-        <p class="catalog-note">Параметры сверяйте с паспортом конкретной комплектации.</p>
+        <p class="catalog-note">Значения приведены со ссылками на источник. Комплектацию проверяйте отдельно.</p>
       </div>
       <div class="product-grid" id="products"></div>
       <div class="empty-state" id="empty-state" hidden>
-        <span class="empty-index">00</span><h3>Совпадений нет</h3><p>Измените один из параметров или начните подбор заново.</p><button class="button button--dark" id="empty-clear" type="button">Сбросить фильтры</button>
+        <h3>Совпадений нет</h3>
+        <p>Ослабьте один из параметров или сбросьте фильтры.</p>
+        <button class="button button--dark" id="empty-clear" type="button">Сбросить фильтры</button>
       </div>
     </section>
 
     <section class="approach-section" id="approach" aria-labelledby="approach-title">
-      <div class="approach-intro"><p class="eyebrow">Перед выбором модели</p><h2 id="approach-title">Смотрите на весь маршрут<span class="title-period">.</span></h2><p>Одна цифра в характеристиках не отвечает на вопрос, как машина поведёт себя на конкретном объекте.</p></div>
+      <div class="approach-intro">
+        <p class="eyebrow">Перед выбором</p>
+        <h2 id="approach-title">Что сверить на складе</h2>
+        <p>Номинальная грузоподъёмность сама по себе не подтверждает, что машина подойдёт к конкретному стеллажу и грузу.</p>
+      </div>
       <div class="approach-list">
-        <article><span class="approach-index">01</span><div><h3>Груз и центр тяжести</h3><p>Учитывайте массу, габариты груза и его положение на вилах.</p></div><span class="approach-arrow" aria-hidden="true">↗</span></article>
-        <article><span class="approach-index">02</span><div><h3>Стеллажи и проходы</h3><p>Сверьте высоту верхнего яруса, ширину коридора и место для разворота.</p></div><span class="approach-arrow" aria-hidden="true">↗</span></article>
-        <article><span class="approach-index">03</span><div><h3>Пол и режим работы</h3><p>Покрытие, уклоны, расстояния и длительность смены влияют на выбор привода и типа машины.</p></div><span class="approach-arrow" aria-hidden="true">↗</span></article>
+        <article>
+          <span class="approach-index">Груз</span>
+          <div><h3>Масса и центр тяжести</h3><p>Сверьте массу, габариты и положение груза. Центр нагрузки у моделей в каталоге различается.</p></div>
+        </article>
+        <article>
+          <span class="approach-index">Мачта</span>
+          <div><h3>Высота и конфигурация</h3><p>Уточните высоту подъёма и сложенную высоту мачты для конкретного варианта.</p></div>
+        </article>
+        <article>
+          <span class="approach-index">Проход</span>
+          <div><h3>Ширина и разворот</h3><p>Сопоставьте габариты машины и радиус поворота с шириной рабочего коридора.</p></div>
+        </article>
       </div>
     </section>
 
     <section class="closing-section" aria-labelledby="closing-title">
-      <div class="closing-mark" aria-hidden="true">СТ<span>/</span></div>
-      <div class="closing-copy"><p class="eyebrow eyebrow--light">Выбор по задаче, а не по догадке</p><h2 id="closing-title">Сравните.<br><span>Задайте вопросы.</span></h2><p>Соберите параметры в запрос, чтобы обсудить с поставщиком подходящую комплектацию.</p></div>
-      <a class="button button--paper" href="#catalog">Вернуться к моделям <span aria-hidden="true">↑</span></a>
-      <div class="closing-lines" aria-hidden="true"></div>
+      <div class="closing-copy">
+        <p class="eyebrow eyebrow--light">Данные для первичного сравнения</p>
+        <h2 id="closing-title">Паспорт конкретной комплектации — финальная проверка.</h2>
+        <p>Перед заказом сверьте мачту, нагрузочную диаграмму и параметры груза с поставщиком.</p>
+      </div>
+      <a class="button button--paper" href="#catalog">Вернуться к моделям</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <a class="wordmark wordmark--footer" href="#top"><span class="wordmark-mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="wordmark-name">СКЛАД<span>/</span>ТЕХНИКА</span></a>
+    <a class="wordmark wordmark--footer" href="#top">
+      <span class="wordmark-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="wordmark-name">СКЛАД<span>/</span>ТЕХНИКА</span>
+    </a>
     <p>Каталог для первичного сравнения складской техники</p>
     <a class="footer-top" href="#top">Наверх <span aria-hidden="true">↑</span></a>
   </footer>
 
-  <div class="compare-bar" id="compare-bar" hidden><div class="compare-bar-copy"><span class="compare-dot" aria-hidden="true"></span><span><strong>Выбрано для сравнения</strong><small>До трёх моделей</small></span></div><button class="button button--accent" type="button" id="bar-compare-open">Сравнить <span id="bar-compare-count">0</span></button><button class="compare-reset" type="button" id="compare-clear">Очистить</button></div>
+  <div class="compare-bar" id="compare-bar" hidden>
+    <div class="compare-bar-copy"><span class="compare-dot" aria-hidden="true"></span><span><strong>Выбрано для сравнения</strong><small>До трёх моделей</small></span></div>
+    <button class="button button--accent" type="button" id="bar-compare-open">Сравнить <span id="bar-compare-count">0</span></button>
+    <button class="compare-reset" type="button" id="compare-clear">Очистить</button>
+  </div>
 
-  <dialog class="dialog" id="compare-dialog" aria-labelledby="compare-title"><div class="dialog-head"><div><p class="eyebrow">Основные параметры</p><h2 id="compare-title">Сравнение моделей</h2></div><button class="dialog-close" id="compare-close" type="button" aria-label="Закрыть сравнение">×</button></div><div class="comparison-wrap" id="comparison"></div><div class="dialog-actions"><button class="button button--quiet" id="quote-open" type="button">Подготовить запрос</button><button class="button button--dark" id="compare-clear-dialog" type="button">Очистить сравнение</button></div></dialog>
+  <dialog class="dialog" id="compare-dialog" aria-labelledby="compare-title">
+    <div class="dialog-head">
+      <div><p class="eyebrow">Параметры моделей</p><h2 id="compare-title">Сравнение</h2></div>
+      <button class="dialog-close" id="compare-close" type="button" aria-label="Закрыть сравнение">×</button>
+    </div>
+    <div class="comparison-wrap" id="comparison"></div>
+    <div class="dialog-actions">
+      <button class="button button--quiet" id="quote-open" type="button">Подготовить запрос</button>
+      <button class="button button--dark" id="compare-clear-dialog" type="button">Очистить сравнение</button>
+    </div>
+  </dialog>
 
-  <dialog class="dialog quote-dialog" id="quote-dialog" aria-labelledby="quote-title"><div class="dialog-head"><div><p class="eyebrow">С выбранной техникой</p><h2 id="quote-title">Собрать запрос</h2></div><button class="dialog-close" id="quote-close" type="button" aria-label="Закрыть форму">×</button></div><form id="quote-form" method="dialog" novalidate>
-    <label class="quote-field"><span>Модели</span><input id="quote-items" name="items" readonly></label>
-    <label class="quote-field"><span>Как к вам обращаться</span><input id="quote-name" name="name" autocomplete="name" required aria-describedby="error-name"><small class="field-error" id="error-name"></small></label>
-    <label class="quote-field"><span>Телефон</span><input id="quote-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-describedby="error-contact"><small class="field-error" id="error-contact"></small></label>
-    <label class="quote-field"><span>Или электронная почта</span><input id="quote-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-describedby="error-email"><small class="field-error" id="error-email"></small></label>
-    <p class="form-note">Запрос собирается только в браузере. После подготовки скопируйте текст и отправьте его поставщику сами.</p>
-    <button class="button button--accent quote-submit" type="submit">Подготовить текст <span aria-hidden="true">↗</span></button>
-  </form><div id="quote-success" class="quote-success" hidden><span class="success-mark" aria-hidden="true">✓</span><h3>Текст обращения готов</h3><p>Скопируйте его и отправьте поставщику удобным способом.</p><label class="quote-field"><span>Текст запроса</span><textarea id="quote-draft" rows="6" readonly></textarea></label><div class="draft-actions"><button class="button button--accent" type="button" id="quote-copy">Скопировать текст</button><button class="button button--dark" type="button" id="quote-close-success">Закрыть</button></div></div></dialog>
+  <dialog class="dialog quote-dialog" id="quote-dialog" aria-labelledby="quote-title">
+    <div class="dialog-head">
+      <div><p class="eyebrow">С выбранной техникой</p><h2 id="quote-title">Собрать запрос</h2></div>
+      <button class="dialog-close" id="quote-close" type="button" aria-label="Закрыть форму">×</button>
+    </div>
+    <form id="quote-form" method="dialog" novalidate>
+      <label class="quote-field"><span>Модели</span><input id="quote-items" name="items" readonly></label>
+      <label class="quote-field"><span>Как к вам обращаться</span><input id="quote-name" name="name" autocomplete="name" required aria-describedby="error-name"><small class="field-error" id="error-name"></small></label>
+      <label class="quote-field"><span>Телефон</span><input id="quote-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-describedby="error-contact"><small class="field-error" id="error-contact"></small></label>
+      <label class="quote-field"><span>Или электронная почта</span><input id="quote-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-describedby="error-email"><small class="field-error" id="error-email"></small></label>
+      <p class="form-note">Текст собирается в браузере. Данные не отправляются и не сохраняются; скопируйте запрос и передайте поставщику сами.</p>
+      <button class="button button--accent quote-submit" type="submit">Подготовить текст</button>
+    </form>
+    <div id="quote-success" class="quote-success" hidden>
+      <span class="success-mark" aria-hidden="true">✓</span>
+      <h3>Текст обращения готов</h3>
+      <p>Скопируйте его и отправьте поставщику удобным способом.</p>
+      <label class="quote-field"><span>Текст запроса</span><textarea id="quote-draft" rows="6" readonly></textarea></label>
+      <div class="draft-actions"><button class="button button--accent" type="button" id="quote-copy">Скопировать текст</button><button class="button button--dark" type="button" id="quote-close-success">Закрыть</button></div>
+    </div>
+  </dialog>
   <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
-  <script type="module" src="catalog.mjs"></script>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
